@@ -31,3 +31,8 @@ business_without_worst_group = GROUP business ALL;
 avg = FOREACH business_without_worst_group GENERATE AVG(business_without_worst.avg_wtdstars);
 DUMP avg;
 
+rate_join_business_without_worst = JOIN rate BY $0 FULL, business_without_worst BY $0;
+rate_join_business_without_worst_group = GROUP rate_join_business_without_worst ALL;
+
+avg_of_rates = FOREACH rate_join_business_without_worst_group GENERATE AVG(rate_join_business_without_worst.avg_wtdstars);
+dump avg_of_rates;
