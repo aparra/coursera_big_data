@@ -25,3 +25,9 @@ averages = FOREACH business_group
 
 ranking = RANK averages BY avg_wtdstars;
 
+business_without_worst = FILTER averages BY (num_ratings > 1);
+business_without_worst_group = GROUP business ALL;
+
+avg = FOREACH business_without_worst_group GENERATE AVG(business_without_worst.avg_wtdstars);
+DUMP avg;
+
