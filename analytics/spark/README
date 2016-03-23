@@ -1,0 +1,2 @@
+start pyspark
+PARK_DRIVER_PYTHON=ipython pyspark --packages com.databricks:spark-csv_2.10:1.3.0
