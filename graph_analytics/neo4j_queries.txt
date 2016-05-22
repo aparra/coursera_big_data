@@ -1,0 +1,15 @@
+// Load data from CSV
+LOAD CSV WITH HEADERS FROM "file:///gene_gene_associations_50k.csv" AS line
+MERGE (n:TrialGene {Name:line.OFFICIAL_SYMBOL_A})
+MERGE (m:TrialGene {Name:line.OFFICIAL_SYMBOL_B})
+MERGE (n) -[:TO {AssociationType:line.EXPERIMENTAL_SYSTEM}]-> (m);
+
+// Counting the number of nodes 
+match (n:TrialGene) return count(n);
+
+// Counting the number of edges
+match (n:TrialGene)-[r]->() return count(r);
+
+// Counting the number of loops
+match (n:TrialGene)-[r]->(n:TrialGene) return count(n);
+
